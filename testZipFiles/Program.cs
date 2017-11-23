@@ -33,12 +33,18 @@ namespace testZipFiles
                 ZipLogFiles(dateFound, testPath);
             }
 
-            DeleteHimZipLogFiles(@"C:\Him\Him.Logs");
-            display($"log files have been zipped and zip files older than {Properties.Settings.Default.HIMZipLogFileDeletionFrequencyInDays} days have been deleted");
+            DeleteHimZipLogFiles(@"C:\directory\directory.Logs");
+           int zipDeletionExpireness = Properties.Settings.Default.HIMZipLogFileDeletionFrequencyInDays;
+            display($"log files have been zipped and zip files older than {zipDeletionExpireness} day{Plural(zipDeletionExpireness)} have been deleted");
 
             display(string.Empty);
             display("press any key to exit:");
             Console.ReadKey();
+        }
+
+        private static string Plural(int number)
+        {
+            return number > 1 ? "s" : string.Empty;
         }
 
         public static List<string> GetListOfDatesFromfileNames(string directoryPath)
